@@ -1,32 +1,18 @@
 from django.db import models
 
 # Create your models here.
-class Books(models.Model):
-    title= models.CharField('Título do livro',max_length=200)
-    
-    author=models.ForeignKey('Author', on_delete=models.PROTECT)
-
+class User(models.Model):
+    username= models.CharField('User',max_length=100)
+    password = models.CharField('Password',max_length=50)
     def __str__(self):
-        return self.title
+        return self.username
 
-class Author(models.Model):
-    name=models.CharField('Nome do autor',max_length=200)
 
-    birth_date = models.DateField(null=True, blank=True)
-
+class Expense (models.Model):
+    expense=models.CharField('Description',max_length=100)
+    value=models.FloatField()
+    date=models.DateField()
+   
     def __str__(self):
-        return self.name
+        return self.expense
 
-class Genre(models.Model):
-    genretype=models.CharField('Género do livro', max_length=101)
-    
-    book = models.ForeignKey('Books',on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.genretype
-    
-class Editor(models.Model):
-    editorname=models.CharField('Nome de Editora', max_length=101)
-    edited=models.ForeignKey('Books', on_delete=models.PROTECT)
-    def __str__(self):
-        return self.editorname
